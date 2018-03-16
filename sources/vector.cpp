@@ -22,8 +22,8 @@ vector_t::vector_t(vector_t const & other)
 
 vector_t & vector_t::operator =(vector_t const & other)
 {
-	capacity_=other.capacity_;
 	size_=other.size_;
+	capacity_=other.capacity_;
 	elements_ = new int[capacity_];
 	for(std::size_t i=0;i<other.capacity_;i++)
 	{
@@ -34,19 +34,18 @@ vector_t & vector_t::operator =(vector_t const & other)
 
 bool vector_t::operator ==(vector_t const & other) const
 {
-	bool succ=true;
+	bool succ=false;
 	 if(size_==other.size_) && (capacity_==other.capacity_)
 	 {
 		 for(size_t i=0;i<other.size_;i++)
 		 {
 			 if(elements_[i]!=other.elements_[i])
 			 {
-				 succ=false;
 				 return succ;
 			 }
 		 }
+		 succ=!succ;
 	 }
-	else succ=false;
 	return succ;
 }
 
@@ -68,7 +67,8 @@ std::size_t vector_t::capacity() const
 void vector_t::push_back(int value)
 {
 	if(capicity_==size_){
-		if(capasity_=0) capacity_=1;
+		if(capasity_=0) 
+			capacity_=1;
 		else capacity_*=2;
 		int * p = new [capacity_];
         	for (std::size_t i=0; i<size_; i++) {
