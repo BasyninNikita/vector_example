@@ -3,15 +3,22 @@
 
 #include "vector.hpp"
 
-vector_t::vector_t():elements_{nullptr},size_{0},capicity_{0}
+vector_t::vector_t():
 {
+	size_ = 0;
+	capacity_ = 0;
+	elements_ = new int [capacity_];
 }
 
 vector_t::vector_t(vector_t const & other)
 {
-	size_ = 0;
-	capacity_ = 0;
-	elements_ = new int [capacity_];	
+	size_ = other.size_;
+	capacity_ = other.capacity_;
+	elements_ = new int [capacity_];
+	
+	for (std::size_t i=0; i<other.capacity_; i++) {
+		elements_[i] = other.elements_[i];
+	}	
 }
 
 vector_t & vector_t::operator =(vector_t const & other)
