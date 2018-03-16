@@ -67,7 +67,7 @@ std::size_t vector_t::capacity() const
 void vector_t::push_back(int value)
 {
 	if(capacity_==size_){
-		if(capacity_=0) 
+		if(capacity_==0) 
 			capacity_=1;
 		else capacity_*=2;
 		int * p = new int [capacity_];
