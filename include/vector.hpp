@@ -15,16 +15,9 @@ public:
 	~vector_t();
 	std::size_t size() const;
 	std::size_t capacity() const;
+	T & at(std::size_t index);
 	void push_back(T value);
 	void pop_back();
-	T & at(std::size_t index)
-	{
-		if (index >= size_)
-		{
-			throw std::out_of_range("Error");
-		}
-		return (*this)[index];
-	}
 	T & operator [](std::size_t index);
 	T operator [](std::size_t index) const;
 	bool operator ==(vector_t const & other) const;
@@ -46,6 +39,15 @@ vector_t<T>::vector_t(vector_t<T> const & other)
 		elements_[i] = other.elements_[i];
 	}	
 }
+template <typename T>
+T & vector_t<T>::at(std::size_t index)
+	{
+		if (index >= size_)
+		{
+			throw std::out_of_range("Error");
+		}
+		return (*this)[index];
+	}
 template <typename T>
 vector_t<T> & vector_t<T>::operator =(vector_t const & other)
 {
