@@ -47,13 +47,13 @@ TEST_CASE("equaling vector")
 
 TEST_CASE("indexing vector")
 {
-	vector_t<float> vector;
+	vector_t<double> vector;
 
 	vector.push_back(1.1);
 
 	REQUIRE( vector[0] == 1.1 );
 
-	vector_t<float> const copy(vector);
+	vector_t<double> const copy(vector);
 	REQUIRE( copy[0] == 1.1 );
 }
 
