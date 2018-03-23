@@ -91,13 +91,13 @@ std::size_t vector_t<T>::capacity() const
     return capacity_;
 }
 template <typename T>
-void vector_t<T>::push_back(int T)
+void vector_t<T>::push_back(T value)
 {
 	if(capacity_==size_){
 		if(capacity_==0) 
 			capacity_=1;
 		else capacity_*=2;
-		T * p = T int [capacity_];
+		T * p = new T [capacity_];
         	for (std::size_t i=0; i<size_; i++) {
             		p[i] = elements_[i];
         	}
