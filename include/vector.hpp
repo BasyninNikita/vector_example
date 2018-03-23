@@ -17,7 +17,7 @@ public:
 	std::size_t capacity() const;
 	void push_back(T value);
 	void pop_back();
-	T & ch(std::size_t index)
+	T & at(std::size_t index)
 	{
 		if (index >= size_)
 		{
