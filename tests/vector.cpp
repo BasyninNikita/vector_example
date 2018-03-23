@@ -128,13 +128,13 @@ TEST_CASE("at_1")
 TEST_CASE("at_2")
 {
 	vector_t<int> vector;
-	vector.push_back(1);
-	vector.push_back(2);
+	vector.push_back(3);
+	vector.push_back(7);
 
-	REQUIRE( vector.at(1) == 2 );
+	REQUIRE( vector.at(1) == 7 );
 }
 
-TEST_CASE("experiment_1")
+TEST_CASE("inc index1")
 {
     vector_t<int> vector;
 	vector.push_back(1);
@@ -142,7 +142,7 @@ TEST_CASE("experiment_1")
     REQUIRE_THROWS_AS( vector.at(1), std::out_of_range);
 }
 
-TEST_CASE("experiment_2")
+TEST_CASE("inc index2")
 {
     vector_t<int> vector;
 	vector.push_back(1);
