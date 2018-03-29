@@ -88,12 +88,20 @@ void print(std::ostream & stream,int lvl,node_t* node){
 		stream << node->value <<std::endl;
 		print(stream, lvl + 1, node->left);
 	}
-void oper(char op, int value,std::ostream& stream){
+void oper1(char op, int value){
 	if(op=='+')
 	{
 		insert(value);
 	}
-	else if(op=='?')
+	
+	else if(op=='q')
+	{
+		exit(0);
+	}
+	else std::cout<<"incorrect operation";	
+}
+	void oper2(char op, int value,std::ostream& stream){
+	if(op=='?')
 	{
 		if(find(value))
 			stream<<"true";
@@ -104,10 +112,6 @@ void oper(char op, int value,std::ostream& stream){
 	{
 		print(stream,0,root_);
 	}
-	else if(op=='q')
-	{
-		exit(0);
-	}
 	else std::cout<<"incorrect operation";	
-}
+	}
 };
