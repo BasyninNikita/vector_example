@@ -18,7 +18,7 @@ public:
 		return root_; 
 	}
 void destr(node_t * node){
- 		if(node!=nullptr
+ 		if(node!=nullptr)
 		   {
 			   destr(node->right);
 			   destr(node->left);
