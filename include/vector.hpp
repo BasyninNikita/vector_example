@@ -95,7 +95,10 @@ void oper(char op, int value,std::ostream& stream){
 	}
 	else if(op=='?')
 	{
-		find(value);
+		if(find(value))
+			stream<<"true";
+		else stream<<"false";
+			
 	}
 	else if(op=='=')
 	{
