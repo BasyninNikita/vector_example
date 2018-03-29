@@ -9,7 +9,7 @@ TEST_CASE("creating tree")
 	REQUIRE(tree.root()==nullptr);
 }
 
-TEST_CASE("add")
+/*TEST_CASE("add")
 {
 	tree_t tree;
 	tree.insert(2);
@@ -26,7 +26,7 @@ TEST_CASE("add")
 	tree.print(ostream,0,tree.root());
 	REQUIRE( ostream.str() == output );
 }
-/*
+*/
 TEST_CASE("?")
 {
 	tree_t tree;
@@ -38,7 +38,7 @@ TEST_CASE("?")
 	REQUIRE( tree.find(6)==false );
 	REQUIRE( tree.find(2)==true );
 }
-
+/*
 TEST_CASE("op")
 {
 	tree_t tree;
