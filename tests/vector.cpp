@@ -39,7 +39,7 @@ TEST_CASE("?")
 	REQUIRE( tree.find(2)==true );
 }
 
-/*TEST_CASE("op")
+TEST_CASE("op")
 {
 	tree_t tree;
 	tree.oper('+',2);
@@ -60,6 +60,6 @@ TEST_CASE("?")
 	tree.oper('=',0,ostream2);
 	REQUIRE( ostream2.str()== output );
 }
-*/
+
 
 
