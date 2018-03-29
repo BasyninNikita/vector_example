@@ -1,21 +1,21 @@
 #include <iostream>
-#include <sstream>
-#include <string>
-
-using namespace std;
 class tree_t
 {
 private:
 	struct node_t {
-		node_t * left=nullptr;
+		node_t * left;
 		node_t * right;
-		int value=0;
+		int value;
 	};
 private:
 	node_t * root_;
 public:
 	tree_t(){
 		root_=nullptr;
+	}
+	node_t* root()
+	{
+		return root_; 
 	}
 void destr(node_t * node){
  		node_t * time=node;
@@ -42,7 +42,7 @@ void destr(node_t * node){
 		}
 }
 ~tree_t(){
-		destr(root);
+		destr(root_);
 	}
 	void insert(int value){
 		node_t * node=new node_t;
@@ -53,7 +53,7 @@ void destr(node_t * node){
 			root_=node;
 			return;
 		}
-		node_t * vetka=root_;
+		node_t * branch=root_;
 		while (branch!=nullptr){   
 			if(branch->value == value){
 			return;
@@ -83,7 +83,7 @@ void destr(node_t * node){
 bool find(int value) const{
 	node_t * node=root;
 	while(node!=nullptr){
-		if (value=node->value)
+		if (value==node->value)
 			return true;
 		else {
 			if (value<node->value){
