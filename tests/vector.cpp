@@ -46,7 +46,7 @@ TEST_CASE("op")
 	tree.oper('+',1);
 	tree.oper('+',3);
 	std::string output{
-		"---3\n'
+		"---3\n"
 		"2\n"
 		"---1"
 	};
