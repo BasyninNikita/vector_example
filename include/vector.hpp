@@ -101,7 +101,7 @@ void print(std::ostream & stream,int lvl,node_t* node){
 			for (unsigned int i = 0; i < lvl; i++) {
 			stream << "---";
 		}
-		stream << node->value << endl;
+		stream << node->value <<std::endl;
 		print(stream, lvl + 1, node->left);
 	}
 void oper(char op, int value,std::ostream& stream){
