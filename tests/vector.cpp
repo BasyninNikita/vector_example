@@ -58,7 +58,7 @@ TEST_CASE("op+?")
 	tree.oper2('?',5,ostream1);
 	REQUIRE( ostream1.str()== "false" );
 }
-TEST_CASE("op+?")
+TEST_CASE("op+=")
 {
 	tree_t tree;
 	tree.oper1('+',2);
