@@ -39,26 +39,39 @@ TEST_CASE("?")
 	REQUIRE( tree.find(2)==true );
 }
 
-TEST_CASE("op")
+
+TEST_CASE("op+?")
 {
 	tree_t tree;
-	tree.oper('+',2);
-	tree.oper('+',1);
-	tree.oper('+',3);
+	tree.oper1('+',2);
+	tree.oper1('+',1);
+	tree.oper1('+',3);
 	std::string output{
 		"---3\n"
 		"2\n"
 		"---1"
 	};
 	std::ostringstream ostream;
-	tree.oper('?',2,ostream);
+	tree.oper2('?',2,ostream);
 	REQUIRE( ostream.str()== "true" );
 	std::ostringstream ostream1;
-	tree.oper('?',5,ostream1);
+	tree.oper2('?',5,ostream1);
 	REQUIRE( ostream1.str()== "false" );
-	std::ostringstream ostream2;
-	tree.oper('=',0,ostream2);
-	REQUIRE( ostream2.str()== output );
+}
+TEST_CASE("op+?")
+{
+	tree_t tree;
+	tree.oper1('+',2);
+	tree.oper1('+',1);
+	tree.oper1('+',3);
+	std::string output{
+		"---3\n"
+		"2\n"
+		"---1"
+	};
+	std::ostringstream ostream;
+	tree.oper2('=',0,ostream);
+	REQUIRE( ostream.str()== output );
 }
 
 
