@@ -104,14 +104,14 @@ void print(std::ostream & stream,int lvl,node_t* node){
 		stream << node->value << endl;
 		print(stream, lvl + 1, node->left);
 	}
-void oper(std::ostream& stream, char op, int value){
+void oper(char op, int value,std::ostream& stream, ){
 	if(op=='+')
 	{
 		insert(value);
 	}
 	else if(op=='=')
 	{
-		print(value)
+		print(stream,0,root_);
 	}
 	else if(op=='?')
 	{
