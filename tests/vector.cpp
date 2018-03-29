@@ -23,8 +23,8 @@ TEST_CASE("+")
 		"---1\n"
 	};
 	std::ostringstream ostream;
-	tree.print(ostream,0,root());
-	REQUIRE( stream.str() == output );
+	tree.print(ostream,0,tree.root());
+	REQUIRE( ostream.str() == output );
 }
 
 TEST_CASE("?")
