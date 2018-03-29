@@ -104,14 +104,10 @@ void print(std::ostream & stream,int lvl,node_t* node){
 		stream << node->value << endl;
 		print(stream, lvl + 1, node->left);
 	}
-void oper(char op, int value,std::ostream& stream, ){
+void oper(char op, int value,std::ostream& stream){
 	if(op=='+')
 	{
 		insert(value);
-	}
-	else if(op=='=')
-	{
-		print(stream,0,root_);
 	}
 	else if(op=='?')
 	{
@@ -122,5 +118,11 @@ void oper(char op, int value,std::ostream& stream, ){
 		exit(0);
 	}
 	else std::cout<<"incorrect operation";	
+}
+void oper=(char op, int value,std::ostream& stream){
+	if(op=='=')
+	{
+		print(stream,0,root_);
+	}
 }
 };
