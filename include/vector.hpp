@@ -17,15 +17,14 @@ public:
 	{
 		return root_; 
 	}
-void destr(node_t * node){
- 		if(node!=nullptr)
-		   {
-			   destr(node->right);
-			   destr(node->left);
-		   }
-	delete node;
-		
-}
+ void destr(node_t* node) {
+    if(node != nullptr)
+    {
+     	destr(node->left);
+     	destr(node->right);
+    }
+    delete node;
+  }
 ~tree_t(){
 		destr(root_);
 	}
