@@ -38,7 +38,7 @@ TEST_CASE("?")
 	REQUIRE( tree.find(6)==false );
 	REQUIRE( tree.find(2)==true );
 }
-/*
+
 TEST_CASE("op")
 {
 	tree_t tree;
