@@ -9,7 +9,7 @@ TEST_CASE("creating tree")
 	REQUIRE(tree.root()==nullptr);
 }
 
-/*TEST_CASE("add")
+TEST_CASE("add")
 {
 	tree_t tree;
 	tree.insert(2);
@@ -39,7 +39,7 @@ TEST_CASE("?")
 	REQUIRE( tree.find(2)==true );
 }
 
-TEST_CASE("op")
+/*TEST_CASE("op")
 {
 	tree_t tree;
 	tree.oper('+',2);
