@@ -113,16 +113,14 @@ void oper(char op, int value,std::ostream& stream){
 	{
 		find(value);
 	}
+	else if(op=='=')
+	{
+		print(stream,0,root_);
+	}
 	else if(op=='q')
 	{
 		exit(0);
 	}
 	else std::cout<<"incorrect operation";	
-}
-void oper=(char op, int value,std::ostream& stream){
-	if(op=='=')
-	{
-		print(stream,0,root_);
-	}
 }
 };
