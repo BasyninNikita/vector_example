@@ -117,6 +117,10 @@ void oper(std::ostream& stream, char op, int value){
 	{
 		find(value);
 	}
+	else if(op=='q')
+	{
+		exit(0);
+	}
 	else std::cout<<"incorrect operation";	
 }
 };
