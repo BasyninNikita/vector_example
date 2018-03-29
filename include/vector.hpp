@@ -57,7 +57,7 @@ void destr(node_t * node){
 		while (branch!=nullptr){   
 			if(branch->value == value){
 			return;
-		}
+			}
 			else if(branch->value<value)
 			{
 				if(branch->right!=nullptr){
@@ -68,20 +68,20 @@ void destr(node_t * node){
 					return;
 				}
 			}
-			else {
+			else if(branch->value>value){
 				if(branch->left != nullptr){
 				branch=branch->left;
+				}
+				else{
+					branch->left=node;
+					return;
+				}
 			}
-			else{
-				branch->left=node;
-				return;
-			}
-		}
-		else return;
+			else return;
 	}
 }
 bool find(int value) const{
-	node_t * node=root;
+	node_t * node=root_;
 	while(node!=nullptr){
 		if (value==node->value)
 			return true;
