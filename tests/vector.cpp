@@ -67,7 +67,7 @@ TEST_CASE("op+=")
 	std::string output{
 		"---3\n"
 		"2\n"
-		"---1"
+		"---1\n"
 	};
 	std::ostringstream ostream;
 	tree.oper2('=',0,ostream);
