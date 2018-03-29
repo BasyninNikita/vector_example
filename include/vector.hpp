@@ -18,28 +18,13 @@ public:
 		return root_; 
 	}
 void destr(node_t * node){
- 		node_t * time=node;
-		while(time!=nullptr)
-		{
-			if(time->left!=nullptr)
-			{
-				time=time->left;
-			}
-			else if(time->right!=nullptr)
-			{
-				time=time->right;
-			}
-			else if((time->left==nullptr) && (time->right==nullptr) &&(time!=node))
-			{
-				delete time;
-				time=node;
-			}
-			else if((time->left==nullptr) && (time->right==nullptr) &&(time==node))
-			{
-				delete time;
-				break;
-			}
-		}
+ 		if(node!=nullptr
+		   {
+			   destr(node->right);
+			   destr(node->left);
+		   }
+	delete node;
+		
 }
 ~tree_t(){
 		destr(root_);
