@@ -22,8 +22,8 @@ public:
     {
      	destr(node->left);
      	destr(node->right);
+	delete node;
     }
-    delete node;
   }
 ~tree_t(){
 		destr(root_);
