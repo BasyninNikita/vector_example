@@ -108,7 +108,7 @@ template <typename T>
 tree_t<T>::void oper1(char op, T value){
 	if(op=='+')
 	{
-		insert(value);void oper2(char op, T value,std::ostream& stream);
+		insert(value);
 	}
 	
 	else if(op=='q')
