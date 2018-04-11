@@ -10,13 +10,13 @@ private:
 	};
 private:
 	node_t * root_;
-	void destr(node_t* node);
 public:
 	tree_t();
 	~tree_t();
+	void destr(node_t* node);
 	void insert(T value);
 	bool find(T value) const;
-	void print(std::ostream & stream,int lvl,node_t* node)
+	void print(std::ostream & stream,int lvl,node_t* node);
 	void oper1(char op, T value);
 	void oper2(char op, T value,std::ostream& stream);
 	node_t* root()
@@ -132,4 +132,3 @@ tree_t<T>::void oper2(char op, T value,std::ostream& stream){
 	}
 	else std::cout<<"incorrect operation";	
 	}
-};
