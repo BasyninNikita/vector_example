@@ -1,148 +1,135 @@
 #include <iostream>
-#include <algorithm>
-#include <cassert>
 template <typename T>
-class vector_t
+class tree_t
 {
 private:
-	T * elements_;
-	std::size_t size_;
-	std::size_t capacity_;
+	struct node_t {
+		node_t * left;
+		node_t * right;
+		T value;
+	};
+private:
+	node_t * root_;
+	void destr(node_t* node);
 public:
-	vector_t();
-	vector_t(vector_t const & other);
-	vector_t & operator =(vector_t const & other);
-	~vector_t();
-	std::size_t size() const;
-	std::size_t capacity() const;
-	T & at(std::size_t index);
-	void push_back(T value);
-	void pop_back();
-	T & operator [](std::size_t index);
-	T operator [](std::size_t index) const;
-	bool operator ==(vector_t const & other) const;
+	tree_t();
+	~tree_t();
+	void insert(T value);
+	bool find(T value) const;
+	void print(std::ostream & stream,int lvl,node_t* node)
+	void oper1(char op, T value);
+	void oper2(char op, T value,std::ostream& stream);
+	node_t* root()
+	{
+		return root_; 
+	}
 };
 template <typename T>
-vector_t<T>::vector_t()
-{
-	size_ = 0;
-	capacity_ = 0;
-	elements_ = new T [capacity_];
-}
-template <typename T>
-vector_t<T>::vector_t(vector_t<T> const & other)
-{
-	size_ = other.size_;
-	capacity_ = other.capacity_;
-	elements_ = new T [capacity_];	
-	for (std::size_t i=0; i<other.capacity_; i++) {
-		elements_[i] = other.elements_[i];
-	}	
-}
-template <typename T>
-T & vector_t<T>::at(std::size_t index)
-	{
-		if (index >= size_)
-		{
-			throw std::out_of_range("Error");
-		}
-		return (*this)[index];
+tree_t<T>::tree_t(){
+		root_=nullptr;
 	}
 template <typename T>
-vector_t<T> & vector_t<T>::operator =(vector_t const & other)
-{
-	size_=other.size_;
-	capacity_=other.capacity_;
-	elements_ = new T[capacity_];
-	for(std::size_t i=0;i<other.capacity_;i++)
-	{
-		elements_[i]=other.elements_[i];
-	}
-	return *this;
-}
-template <typename T>
-bool vector_t<T>::operator ==(vector_t const & other) const
-{
-	bool succ=false;
-	 if((size_==other.size_) && (capacity_==other.capacity_))
-	 {
-		 for(size_t i=0;i<other.size_;i++)
-		 {
-			 if(elements_[i]!=other.elements_[i])
-			 {
-				 return succ;
-			 }
-		 }
-		 succ=!succ;
-	 }
-	return succ;
-}
-template <typename T>
-vector_t<T>::~vector_t()
-{
-	delete []elements_;
-}
-template <typename T>
-std::size_t vector_t<T>::size() const
-{
-    return size_;
-}
-template <typename T>
-std::size_t vector_t<T>::capacity() const
-{
-    return capacity_;
-}
-template <typename T>
-void vector_t<T>::push_back(T value)
-{
-	if(capacity_==size_){
-		if(capacity_==0) 
-			capacity_=1;
-		else capacity_*=2;
-		T * p = new T [capacity_];
-        	for (std::size_t i=0; i<size_; i++) {
-            		p[i] = elements_[i];
-        	}
-        	delete [] elements_;
-        	elements_ = p;
-	}
-	elements_[size_++]=value;
-	
-}
-template <typename T>
-void vector_t<T>::pop_back()
-{
-    if(size_==0) return;
-    size_--;
-    if( size_ == capacity_/4 ){
-        capacity_ /=2;
-        T * p = new T [capacity_];
-        for (std::size_t i=0; i<size_; i++) {
-            p[i] = elements_[i];
-        }
-        delete [] elements_;
-        elements_ = p;
+tree_t<T>:: void destr(node_t* node) {
+    if(node != nullptr)
+    {
+     	destr(node->left);
+     	destr(node->right);
+	delete node;
     }
-}
+  }
 template <typename T>
-T & vector_t<T>::operator [](std::size_t index)
-{
-	return elements_[index];
-}
-template <typename T>
-T vector_t<T>::operator [](std::size_t index) const
-{
-	return elements_[index];
-}
-template <typename T>
-bool operator !=(vector_t<T> const & lhs, vector_t<T> const & rhs)
-{
-	bool succ=true;
-	if(lhs==rhs)
-	{
-		succ=false;
+tree_t<T>::~tree_t(){
+		destr(root_);
 	}
-	return succ;
+template <typename T>
+tree_t<T>::void insert(T value){
+		node_t * node=new node_t;
+		node->right=nullptr;
+		node->left=nullptr;
+		node->value=value;
+		if (root_==nullptr){
+			root_=node;
+			return;
+		}
+		node_t * branch=root_;
+		while (branch!=nullptr){   
+			if(branch->value == value){
+			return;
+			}
+			else if(branch->value<value)
+			{
+				if(branch->right!=nullptr){
+				branch=branch->right;
+				}
+				else {
+					branch->right=node;
+					return;
+				}
+			}
+			else if(branch->value>value){
+				if(branch->left != nullptr){
+				branch=branch->left;
+				}
+				else{
+					branch->left=node;
+					return;
+				}
+			}
+			else return;
+	}
 }
-
-
+template <typename T>
+tree_t<T>::bool find(int T) const{
+	node_t * node=root_;
+	while(node!=nullptr){
+		if (value==node->value)
+			return true;
+		else {
+			if (value<node->value){
+			node=node->left;	
+			}
+			else node=node->right;
+		}
+	}
+	return false;
+}
+template <typename T>
+tree_t<T>::void print(std::ostream & stream,int lvl,node_t* node){
+	if (node==nullptr)
+		return;
+		print(stream,lvl +1,node->right);
+			for (unsigned int i = 0; i < lvl; i++) {
+			stream << "---";
+		}
+		stream << node->value <<std::endl;
+		print(stream, lvl + 1, node->left);
+	}
+template <typename T>
+tree_t<T>::void oper1(char op, T value){
+	if(op=='+')
+	{
+		insert(value);void oper2(char op, T value,std::ostream& stream);
+	}
+	
+	else if(op=='q')
+	{
+		exit(0);
+	}
+	else std::cout<<"incorrect operation";	
+}
+template <typename T>
+tree_t<T>::void oper2(char op, T value,std::ostream& stream){
+	if(op=='?')
+	{
+		if(find(value))
+			stream<<"true";
+		else stream<<"false";
+			
+	}
+	else if(op=='=')
+	{
+		print(stream,0,root_);
+	}
+	else std::cout<<"incorrect operation";	
+	}
+};
