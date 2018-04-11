@@ -12,8 +12,8 @@ private:
 	node_t * root_;
 public:
 	tree_t();
-	~tree_t();
 	void destr(node_t* node);
+	~tree_t();
 	void insert(T value);
 	bool find(T value) const;
 	void print(std::ostream & stream,int lvl,node_t* node);
@@ -29,7 +29,7 @@ tree_t<T>::tree_t(){
 		root_=nullptr;
 	}
 template <typename T>
-tree_t<T>:: void destr(node_t* node) {
+tree_t<T>:: destr(node_t* node) {
     if(node != nullptr)
     {
      	destr(node->left);
@@ -42,7 +42,7 @@ tree_t<T>::~tree_t(){
 		destr(root_);
 	}
 template <typename T>
-tree_t<T>::void insert(T value){
+tree_t<T>:: insert(T value){
 		node_t * node=new node_t;
 		node->right=nullptr;
 		node->left=nullptr;
@@ -79,7 +79,7 @@ tree_t<T>::void insert(T value){
 	}
 }
 template <typename T>
-tree_t<T>::bool find(int T) const{
+tree_t<T>:: find(int T) const{
 	node_t * node=root_;
 	while(node!=nullptr){
 		if (value==node->value)
@@ -94,7 +94,7 @@ tree_t<T>::bool find(int T) const{
 	return false;
 }
 template <typename T>
-tree_t<T>::void print(std::ostream & stream,int lvl,node_t* node){
+tree_t<T>::print(std::ostream & stream,int lvl,node_t* node){
 	if (node==nullptr)
 		return;
 		print(stream,lvl +1,node->right);
@@ -105,7 +105,7 @@ tree_t<T>::void print(std::ostream & stream,int lvl,node_t* node){
 		print(stream, lvl + 1, node->left);
 	}
 template <typename T>
-tree_t<T>::void oper1(char op, T value){
+tree_t<T>:: oper1(char op, T value){
 	if(op=='+')
 	{
 		insert(value);
@@ -118,7 +118,7 @@ tree_t<T>::void oper1(char op, T value){
 	else std::cout<<"incorrect operation";	
 }
 template <typename T>
-tree_t<T>::void oper2(char op, T value,std::ostream& stream){
+tree_t<T>:: oper2(char op, T value,std::ostream& stream){
 	if(op=='?')
 	{
 		if(find(value))
