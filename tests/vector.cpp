@@ -96,7 +96,7 @@ TEST_CASE("remove")
 	tree.oper1('+',2);
 	tree.oper1('+',1);
 	tree.oper1('+',3);
-	REQUIRE(tree.remove(3);
+	REQUIRE(tree.remove(3));
 	REQUIRE(!(tree.remove(6));
 }
 
