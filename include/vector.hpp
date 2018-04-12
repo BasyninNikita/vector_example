@@ -157,13 +157,13 @@ void tree_t<T>:: oper2(char op, T value,std::ostream& stream){
 	else std::cout<<"incorrect operation";	
 	}
 template <typename T>
-tree_t(std::initializer_list<T> keys)
+tree_t<T>::tree_t(std::initializer_list<T> keys)
 	{
 		int n = keys.size();
-		const int* _ptr = keys.begin();
+		const int* ptr = keys.begin();
 		for (int i=0; i < n; i++)
 		{
-			insert(_ptr[i]);
+			insert(ptr[i]);
 		}
 	}
 template<typename T>
@@ -208,7 +208,7 @@ else
 	{return false;}
 	else {
 		if (b->left == nullptr && b->right == nullptr) {
-			delete param2;
+			delete b;
 			return true;
 		}
 		else {
