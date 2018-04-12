@@ -73,5 +73,21 @@ TEST_CASE("op+=")
 	tree.oper2('=',0,ostream);
 	REQUIRE( ostream.str()== output );
 }
-
+TEST_CASE("ravenstvo")
+{
+	tree_t<int> tree1;
+	tree_t<int> tree2;
+	tree_t<int> tree3;
+	tree1.oper1('+',2);
+	tree1.oper1('+',1);
+	tree1.oper1('+',3);
+	tree2.oper1('+',2);
+	tree2.oper1('+',1);
+	tree2.oper1('+',3);
+	tree3.oper1('+',5);
+	tree3.oper1('+',2);
+	tree3.oper1('+',7);
+	REQUIRE(tree1==tree2);
+	REQUIRE(tree1!=tree3);
+}
 
