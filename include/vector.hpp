@@ -159,11 +159,11 @@ void tree_t<T>:: oper2(char op, T value,std::ostream& stream){
 template <typename T>
 tree_t(std::initializer_list<T> keys)
 	{
-		root_ = nullptr;
-		size_t size = keys.size();
-		for (size_t i = 0; i < size; i++) {
-			T a = *(keys.begin()+i);
-			insert(a);
+		int n = keys.size();
+		const int* _ptr = keys.begin();
+		for (int i=0; i < n; i++)
+		{
+			insert(_ptr[i]);
 		}
 	}
 template<typename T>
@@ -177,7 +177,7 @@ bool operator !=(tree_t<T> & lhs, tree_t<T> & rhs)
 	return succ;
 }
 template <typename T>
-bool tree_t<T>::remove(T key); 
+bool tree_t<T>::remove(T key)
 {
 if (root_ == nullptr)
 {
