@@ -20,6 +20,7 @@ public:
 	void oper1(char op, T value);
 	void oper2(char op, T value,std::ostream& stream);
 	bool operator==(tree_t const & other) const;
+	bool ravnbranch(node_t * first,node_t * second)
 	node_t* root()
 	{
 		return root_; 
