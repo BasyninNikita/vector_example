@@ -79,6 +79,10 @@ void tree_t<T>:: insert(T value){
 	}
 }
 template <typename T>
+void tree_t<T>:: delete(T value){
+	
+}
+template <typename T>
 bool tree_t<T>:: find(T value) const{
 	node_t * node=root_;
 	while(node!=nullptr){
