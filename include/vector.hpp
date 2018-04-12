@@ -20,7 +20,8 @@ public:
 	void oper1(char op, T value);
 	void oper2(char op, T value,std::ostream& stream);
 	bool operator==(tree_t const & other) const;
-	bool ravnbranch(node_t * first,node_t * second)
+	bool ravnbranch(node_t * first,node_t * second);
+	bool operator !=(tree_t & lhs, tree_t & rhs);
 	node_t* root()
 	{
 		return root_; 
@@ -152,3 +153,12 @@ void tree_t<T>:: oper2(char op, T value,std::ostream& stream){
 	}
 	else std::cout<<"incorrect operation";	
 	}
+bool tree_t<T>::operator !=(tree_t & lhs, tree_t & rhs) 
+{
+	bool succ=true;
+	if(lhs==rhs)
+	{
+		succ=false;
+	}
+	return succ;
+}
