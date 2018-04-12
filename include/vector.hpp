@@ -101,7 +101,7 @@ bool tree_t<T>::operator==(tree_t const & other) const
 	node_t * first;
 	node_t * second;
         first = root_;
-        second= other.root_();
+        second= other.root();
         return(ravnbranch(first, second));
 }
 template<typename T>
