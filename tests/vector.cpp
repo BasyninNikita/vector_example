@@ -90,4 +90,13 @@ TEST_CASE("ravenstvo")
 	REQUIRE(tree1==tree2);
 	REQUIRE(tree1!=tree3);
 }
+TEST_CASE("remove")
+{
+	tree_t<int> tree;
+	tree.oper1('+',2);
+	tree.oper1('+',1);
+	tree.oper1('+',3);
+	REQUIRE(tree.remove(3)==true);
+	REQUIRE(tree.remove(6)==false);
+}
 
