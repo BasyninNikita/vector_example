@@ -154,6 +154,15 @@ void tree_t<T>:: oper2(char op, T value,std::ostream& stream){
 	}
 	else std::cout<<"incorrect operation";	
 	}
+tree_t(std::initializer_list<T> keys)
+	{
+		root_ = nullptr;
+		size_t size = keys.size();
+		for (size_t i = 0; i < size; i++) {
+			T a = *(keys.begin()+i);
+			insert(a);
+		}
+	}
 template<typename T>
 bool operator !=(tree_t<T> & lhs, tree_t<T> & rhs) 
 {
