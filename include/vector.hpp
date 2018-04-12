@@ -98,7 +98,8 @@ bool tree_t<T>:: find(T value) const{
 template<typename T>
 bool tree_t<T>::operator==(tree_t const & other) const
 {
-	node_t * first, * second;
+	node_t * first;
+	node_t * second;
         first = root_;
         second= other.root();
         return(ravnbranch(first, second));
@@ -107,8 +108,10 @@ template<typename T>
 bool tree_t<T>:: ravnbranch(node_t * first,node_t * second)
 {
 	if((first==nullptr) && (second==nullptr)) return true;
-	else if((first.value==second.value)&&(ravnbranch(first.left,second.left) && (ravnbranch(first.right,second.right))
-		return true;
+	else if (first!=nullptr && second!=nullptr){
+			if((first->value==second->value)&&(ravnbranch(first->left,second->left) && (ravnbranch(first->right,second->right))
+				return true;
+							 }
 	else return false;
 }
 template <typename T>
@@ -151,7 +154,7 @@ void tree_t<T>:: oper2(char op, T value,std::ostream& stream){
 	else std::cout<<"incorrect operation";	
 	}
 template<typename T>
-bool tree_t<T>::operator !=(tree_t & lhs, tree_t & rhs) 
+bool operator !=(tree_t<T> & lhs, tree_t<T> & rhs) 
 {
 	bool succ=true;
 	if(lhs==rhs)
