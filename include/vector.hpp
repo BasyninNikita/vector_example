@@ -109,7 +109,7 @@ bool tree_t<T>:: ravnbranch(node_t * first,node_t * second)
 {
 	if((first==nullptr) && (second==nullptr)) return true;
 	else if (first!=nullptr && second!=nullptr){
-			if((first->value==second->value)&&(ravnbranch(first->left,second->left) && (ravnbranch(first->right,second->right))
+			if((first->value==second->value)&&(ravnbranch(first->left,second->left)) && (ravnbranch(first->right,second->right)))
 				return true;
 							 }
 	else return false;
