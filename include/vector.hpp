@@ -21,6 +21,8 @@ public:
 	void oper2(char op, T value,std::ostream& stream);
 	bool operator==(tree_t & other) const;
 	bool ravnbranch(node_t * first,node_t * second) const;
+	tree_t(std::initializer_list<T> keys);
+	bool remove(T key);
 	node_t* root()
 	{
 		return root_; 
@@ -154,6 +156,7 @@ void tree_t<T>:: oper2(char op, T value,std::ostream& stream){
 	}
 	else std::cout<<"incorrect operation";	
 	}
+template <typename T>
 tree_t(std::initializer_list<T> keys)
 	{
 		root_ = nullptr;
@@ -173,3 +176,73 @@ bool operator !=(tree_t<T> & lhs, tree_t<T> & rhs)
 	}
 	return succ;
 }
+template <typename T>
+bool tree_t<T>::remove(T key); 
+{
+if (root_ == nullptr)
+{
+	return false;
+}
+else
+{
+	node_t* a = root_;
+	node_t* b = root_;
+	for(;;)
+	{
+		if (b->value == key)
+		{break;		}
+		else if (b->value < key)
+		{
+			a = b;
+			b = b->right;
+		}
+		else if (b->value > key)
+		{
+			a = b;
+			b = b->left;
+		}
+		else if (b == nullptr) 
+		{break;}
+	}
+	if (b == nullptr) 
+	{return false;}
+	else {
+		if (b->left == nullptr && b->right == nullptr) {
+			delete param2;
+			return true;
+		}
+		else {
+			if (b->left == nullptr && b->right != nullptr) {
+				if (b == a->right) {
+					a->right = b->right;
+				}
+				if (b == a->left) {
+					a->left = b->right;
+				}
+				delete b;
+			}
+			else if (b->left != nullptr && b->right == nullptr) {
+				if (b == a->right) {
+					a->right = b->left;
+				}
+				if (b == a->left) 
+				{a->left = b->left;}
+				delete b;
+			}
+			else if (b->left != nullptr && b->right != nullptr) {
+				node_t* c = b;
+				a = b;
+				b = b->right;
+				while (b->left != nullptr) {
+					a = b;
+					b = b->left;
+				}
+				c->value = b->value;
+				a = b->right;
+				delete b;
+			}
+		}
+	}
+}
+return true;
+} 
