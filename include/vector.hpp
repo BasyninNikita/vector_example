@@ -107,10 +107,11 @@ bool tree_t<T>::operator==(tree_t & other) const
 template<typename T>
 bool tree_t<T>:: ravnbranch(node_t * first,node_t * second) const
 {
-	if((first==nullptr) && (second==nullptr)) return true;
+	if((first==nullptr) && (second==nullptr)) return (true);
 	else if (first!=nullptr && second!=nullptr){
 			return((first->value==second->value)&&(ravnbranch(first->left,second->left)) && (ravnbranch(first->right,second->right)));
 							 }
+	else return(false);
 }
 template <typename T>
 void tree_t<T>::print(std::ostream & stream,int lvl,node_t* node){
