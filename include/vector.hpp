@@ -20,7 +20,7 @@ public:
 	void oper1(char op, T value);
 	void oper2(char op, T value,std::ostream& stream);
 	bool operator==(tree_t const & other) const;
-	bool ravnbranch(node_t * first,node_t * second);
+	bool ravnbranch(node_t * first,node_t * second) const;
 	node_t* root()
 	{
 		return root_; 
@@ -101,11 +101,11 @@ bool tree_t<T>::operator==(tree_t const & other) const
 	node_t * first;
 	node_t * second;
         first = root_;
-        second= other.root();
+        second= other.root_();
         return(ravnbranch(first, second));
 }
 template<typename T>
-bool tree_t<T>:: ravnbranch(node_t * first,node_t * second)
+bool tree_t<T>:: ravnbranch(node_t * first,node_t * second) const
 {
 	if((first==nullptr) && (second==nullptr)) return true;
 	else if (first!=nullptr && second!=nullptr){
