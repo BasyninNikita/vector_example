@@ -95,13 +95,15 @@ bool tree_t<T>:: find(T value) const{
 	}
 	return false;
 }
-bool tree_t<T>::operator==(tree_t & other) const
+template<typename T>
+bool tree_t<T>::operator==(tree_t const & other) const
 {
 	node_t * first, * second;
         first = root_;
         second= other.root();
         return(ravnbranch(first, second));
 }
+template<typename T>
 bool tree_t<T>:: ravnbranch(node_t * first,node_t * second)
 {
 	if((first==nullptr) && (second==nullptr)) return true;
@@ -148,6 +150,7 @@ void tree_t<T>:: oper2(char op, T value,std::ostream& stream){
 	}
 	else std::cout<<"incorrect operation";	
 	}
+template<typename T>
 bool tree_t<T>::operator !=(tree_t & lhs, tree_t & rhs) 
 {
 	bool succ=true;
