@@ -21,7 +21,6 @@ public:
 	void oper2(char op, T value,std::ostream& stream);
 	bool operator==(tree_t const & other) const;
 	bool ravnbranch(node_t * first,node_t * second);
-	bool operator !=(tree_t & lhs, tree_t & rhs);
 	node_t* root()
 	{
 		return root_; 
@@ -80,10 +79,6 @@ void tree_t<T>:: insert(T value){
 			}
 			else return;
 	}
-}
-template <typename T>
-void tree_t<T>:: delete(T value){
-	
 }
 template <typename T>
 bool tree_t<T>:: find(T value) const{
