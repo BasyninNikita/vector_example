@@ -88,7 +88,7 @@ TEST_CASE("ravenstvo")
 	tree3.oper1('+',2);
 	tree3.oper1('+',7);
 	REQUIRE(tree1==tree2);
-	REQUIRE(tree1!=tree3);
+	REQUIRE(!(tree1==tree3));
 }
 TEST_CASE("removing")
 {
