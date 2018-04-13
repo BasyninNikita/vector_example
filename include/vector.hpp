@@ -168,70 +168,80 @@ tree_t<T>::tree_t(std::initializer_list<T> keys)
 		}
 	}
 template <typename T>
-bool tree_t<T>::remove(T key)
+bool tree_t<T>::remove(T key) 
 {
-if(!(find(key))){return false;}
-else if (root_ == nullptr)
+if (root_ == nullptr)
 {
 	return false;
 }
 else
 {
-	node_t* a = root_;
-	node_t* b = root_;
-	while(1)
+	node_t* param1 = root_;
+	node_t* param2 = root_;
+	while (1)
 	{
-		if (b->value == key)
-		{break;		}
-		else if (b->value < key)
+		if (param2->value == key)
 		{
-			a = b;
-			b = b->right;
+			break;
 		}
-		else if (b->value > key)
+		else if (param2->value < key)
 		{
-			a = b;
-			b = b->left;
+			param1 = param2;
+			param2 = param2->right;
 		}
-		else if (b == nullptr) 
-		{break;}
+		else if (param2->value > key)
+		{
+			param1 = param2;
+			param2 = param2->left;
+		}
+		else if (param2 == nullptr) {
+			break;
+		}
 	}
-	if (b == nullptr) 
-	{return false;}
+	if (param2 == nullptr) {
+		return false;
+	}
 	else {
-		if (b->left == nullptr && b->right == nullptr) {
-			delete b;
+		if (param2->left == nullptr && param2->right == nullptr) {
+			if (param2 == param1->right) {
+				param1->right = nullptr;
+			}
+			if (param2 == param1->left) {
+				param1->left = nullptr;
+			}
+			delete param2;
 			return true;
 		}
 		else {
-			if (b->left == nullptr && b->right != nullptr) {
-				if (b == a->right) {
-					a->right = b->right;
+			if (param2->left == nullptr && param2->right != nullptr) {
+				if (param2 == param1->right) {
+					param1->right = nullptr;
 				}
-				if (b == a->left) {
-					a->left = b->right;
+				if (param2 == param1->left) {
+					param1->left = nullptr;
 				}
-				delete b;
+				delete param2;
 			}
-			else if (b->left != nullptr && b->right == nullptr) {
-				if (b == a->right) {
-					a->right = b->left;
+			else if (param2->left != nullptr && param2->right == nullptr) {
+				if (param2 == param1->right) {
+					param1->right = nullptr;
 				}
-				if (b == a->left) 
-				{a->left = b->left;}
-				delete b;
+				if (param2 == param1->left) {
+					param1->left = nullptr;
+				}
+				delete param2;
 			}
-			else if (b->left != nullptr && b->right != nullptr) {
-				node_t* c = b;
-				a = b;
-				b = b->right;
-				while (b->left != nullptr) {
-					a = b;
-					b = b->left;
+			else if (param2->left != nullptr && param2->right != nullptr) {
+				node_t* param = param2;
+				param1 = param2;
+				param2 = param2->right;
+				while (param2->left != nullptr) {
+					param1 = param2;
+					param2 = param2->left;
 				}
-				c->value = b->value;
-				a->left = b->right;
-				delete b;
+				param->value = param2->value;
+				param1->left = param2->right;
+				delete param2;
 			}
 		}
 	}
