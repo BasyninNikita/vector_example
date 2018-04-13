@@ -99,4 +99,16 @@ TEST_CASE("removing")
 	REQUIRE(tree.remove(3));
 	REQUIRE(!(tree.remove(6)));
 }
-
+TEST_CASE(" initializer_list ")
+{
+	std::initializer_list <int> list{ 7, 3, 9, 6};
+	tree_t<int> My_tree(list);
+	std::ostringstream ostream;
+	My_tree.print(ostream, 0, My_tree.root());
+	std::string output {
+		"---9\n"
+		"7\n"
+		"------6\n"
+		"---3\n"};
+	REQUIRE(output == ostream.str());
+}
