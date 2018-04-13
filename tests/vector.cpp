@@ -103,7 +103,7 @@ TEST_CASE("deleting")
                             "------2\n"};
 	    std::ostringstream ostream1;
 	    tree.oper2('=',0,ostream1);
-	    REQUIRE( ostream1.str() == result5 ); 
+	    REQUIRE( ostream1.str() == result1 ); 
 	    tree.remove(2);
     	    std::string result2{"------11\n"
 	                        "------------9\n"
@@ -113,6 +113,6 @@ TEST_CASE("deleting")
                             	"---3\n"};
 	    std::ostringstream ostream2;
 	    tree.oper2('=',0,ostream2);
-	    REQUIRE( ostream2.str() == result1 );
+	    REQUIRE( ostream2.str() == result2 );
 }
 
