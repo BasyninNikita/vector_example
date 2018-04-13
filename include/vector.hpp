@@ -168,7 +168,7 @@ void tree_t<T>:: oper2(char op, T value,std::ostream& stream){
 	else std::cout<<"incorrect operation";	
 	}
 template <typename T>
-bool remove(T value){
+bool tree<T>:: remove(T value){
        if (root_ == nullptr)
        {
            return false;
