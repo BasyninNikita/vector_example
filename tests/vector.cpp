@@ -90,27 +90,29 @@ TEST_CASE("ravenstvo")
 	REQUIRE(tree1==tree2);
 	REQUIRE(!(tree1==tree3));
 }
-/*
-TEST_CASE("removing")
+TEST_CASE("deleting")
 {
-	tree_t<int> tree;
-	tree.oper1('+',2);
-	tree.oper1('+',1);
-	tree.oper1('+',3);
-	REQUIRE(tree.remove(3));
-	REQUIRE(!(tree.remove(6)));
+    	tree_t<int> tree{4, 5, 3, 2, 6, 11, 8, 9};
+    	tree.remove(6);
+    	std::string result1{"------11\n"
+	                    "------------9\n"
+                            "---------8\n"
+                            "---5\n"
+                            "4\n"
+                            "---3\n"
+                            "------2\n"};
+	    std::ostringstream ostream1;
+	    tree.oper2('=',0,ostream1);
+	    REQUIRE( ostream1.str() == result5 ); 
+	    tree.remove(2);
+    	    std::string result2{"------11\n"
+	                        "------------9\n"
+                                "---------8\n"
+                            	"---5\n"
+                            	"4\n"
+                            	"---3\n"};
+	    std::ostringstream ostream2;
+	    tree.oper2('=',0,ostream2);
+	    REQUIRE( ostream2.str() == result1 );
 }
-*/
-TEST_CASE(" initializer_list ")
-{
-	std::initializer_list <int> list{ 7, 3, 9, 6};
-	tree_t<int> My_tree(list);
-	std::ostringstream ostream;
-	My_tree.print(ostream, 0, My_tree.root());
-	std::string output {
-		"---9\n"
-		"7\n"
-		"------6\n"
-		"---3\n"};
-	REQUIRE(output == ostream.str());
-}
+
