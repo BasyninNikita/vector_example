@@ -33,6 +33,17 @@ tree_t<T>::tree_t(){
 		root_=nullptr;
 	}
 template <typename T>
+tree_t<T>::tree_t(std::initializer_list<T> keys)
+{
+	root_=nullptr;
+	int n = keys.size();
+	const int* _ptr = keys.begin();
+	for (int i=0; i < n; i++)
+	{
+		insert(_ptr[i]);
+	}
+}
+template <typename T>
 void tree_t<T>:: destr(node_t* node) {
     if(node != nullptr)
     {
@@ -155,17 +166,6 @@ void tree_t<T>:: oper2(char op, T value,std::ostream& stream){
 		print(stream,0,root_);
 	}
 	else std::cout<<"incorrect operation";	
-	}
-template <typename T>
-tree_t<T>::tree_t(std::initializer_list<T> keys)
-	{
-		root_=nullptr;
-		int n = keys.size();
-		const int* ptr = keys.begin();
-		for (int i=0; i < n; i++)
-		{
-			insert(ptr[i]);
-		}
 	}
 template <typename T>
 bool tree_t<T>::remove(T key) 
