@@ -189,7 +189,7 @@ else
 {
 	node_t* a = root_;
 	node_t* b = root_;
-	for(;;)
+	while(1)
 	{
 		if (b->value == key)
 		{break;		}
