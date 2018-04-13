@@ -179,7 +179,8 @@ bool operator !=(tree_t<T> & lhs, tree_t<T> & rhs)
 template <typename T>
 bool tree_t<T>::remove(T key)
 {
-if (root_ == nullptr)
+if(!(find(key))){return false;}
+else if (root_ == nullptr)
 {
 	return false;
 }
