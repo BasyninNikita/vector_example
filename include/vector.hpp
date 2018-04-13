@@ -240,7 +240,7 @@ else
 					b = b->left;
 				}
 				c->value = b->value;
-				a.left = b->right;
+				a->left = b->right;
 				delete b;
 			}
 		}
