@@ -176,72 +176,72 @@ if (root_ == nullptr)
 }
 else
 {
-	node_t* param1 = root_;
-	node_t* param2 = root_;
+	node_t* a = root_;
+	node_t* b = root_;
 	while (1)
 	{
-		if (param2->value == key)
+		if (b->value == key)
 		{
 			break;
 		}
-		else if (param2->value < key)
+		else if (b->value < key)
 		{
-			param1 = param2;
-			param2 = param2->right;
+			a = b;
+			b = b->right;
 		}
-		else if (param2->value > key)
+		else if (b->value > key)
 		{
-			param1 = param2;
-			param2 = param2->left;
+			a = b;
+			b = b->left;
 		}
-		else if (param2 == nullptr) {
+		else if (b == nullptr) {
 			break;
 		}
 	}
-	if (param2 == nullptr) {
+	if (b == nullptr) {
 		return false;
 	}
 	else {
-		if (param2->left == nullptr && param2->right == nullptr) {
-			if (param2 == param1->right) {
-				param1->right = nullptr;
+		if (b->left == nullptr && b->right == nullptr) {
+			if (b == a->right) {
+				a->right = nullptr;
 			}
-			if (param2 == param1->left) {
-				param1->left = nullptr;
+			if (b == a->left) {
+				a->left = nullptr;
 			}
-			delete param2;
+			delete b;
 			return true;
 		}
 		else {
-			if (param2->left == nullptr && param2->right != nullptr) {
-				if (param2 == param1->right) {
-					param1->right = nullptr;
+			if (b->left == nullptr && b->right != nullptr) {
+				if (b == a->right) {
+					a->right = nullptr;
 				}
-				if (param2 == param1->left) {
-					param1->left = nullptr;
+				if (b == a->left) {
+					a->left = nullptr;
 				}
-				delete param2;
+				delete b;
 			}
-			else if (param2->left != nullptr && param2->right == nullptr) {
-				if (param2 == param1->right) {
-					param1->right = nullptr;
+			else if (b->left != nullptr && b->right == nullptr) {
+				if (b == a->right) {
+					a->right = nullptr;
 				}
-				if (param2 == param1->left) {
-					param1->left = nullptr;
+				if (b == a->left) {
+					a->left = nullptr;
 				}
-				delete param2;
+				delete b;
 			}
-			else if (param2->left != nullptr && param2->right != nullptr) {
-				node_t* param = param2;
-				param1 = param2;
-				param2 = param2->right;
-				while (param2->left != nullptr) {
-					param1 = param2;
-					param2 = param2->left;
+			else if (b->left != nullptr && b->right != nullptr) {
+				node_t* c = b;
+				a = b;
+				b = b->right;
+				while (b->left != nullptr) {
+					a = b;
+					b = b->left;
 				}
-				param->value = param2->value;
-				param1->left = param2->right;
-				delete param2;
+				c->value = b->value;
+				a->left = b->right;
+				delete b;
 			}
 		}
 	}
