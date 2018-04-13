@@ -167,16 +167,6 @@ tree_t<T>::tree_t(std::initializer_list<T> keys)
 			insert(ptr[i]);
 		}
 	}
-template<typename T>
-bool operator !=(tree_t<T> & lhs, tree_t<T> & rhs) 
-{
-	bool succ=true;
-	if(lhs==rhs)
-	{
-		succ=false;
-	}
-	return succ;
-}
 template <typename T>
 bool tree_t<T>::remove(T key)
 {
