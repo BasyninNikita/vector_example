@@ -19,7 +19,7 @@ public:
 	void print(std::ostream & stream,int lvl,node_t* node);
 	void oper1(char op, T value);
 	void oper2(char op, T value,std::ostream& stream);
-	bool operator==(tree_t & other) const;
+	auto operator==(tree_t & other) const;
 	bool ravnbranch(node_t * first,node_t * second) const;
 	tree_t(std::initializer_list<T> keys);
 	bool remove(T key);
@@ -98,7 +98,7 @@ bool tree_t<T>:: find(T value) const{
 	return false;
 }
 template<typename T>
-bool tree_t<T>::operator==(tree_t & other) const
+auto tree_t<T>::operator==(tree_t & other) const
 {
 	node_t * first;
 	node_t * second;
