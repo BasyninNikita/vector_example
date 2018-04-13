@@ -168,83 +168,81 @@ void tree_t<T>:: oper2(char op, T value,std::ostream& stream){
 	else std::cout<<"incorrect operation";	
 	}
 template <typename T>
-bool tree_t<T>::remove(T key) 
-{
-if (root_ == nullptr)
-{
-	return false;
-}
-else
-{
-	node_t* a = root_;
-	node_t* b = root_;
-	while (1)
-	{
-		if (b->value == key)
-		{
-			break;
-		}
-		else if (b->value < key)
-		{
-			a = b;
-			b = b->right;
-		}
-		else if (b->value > key)
-		{
-			a = b;
-			b = b->left;
-		}
-		else if (b == nullptr) {
-			break;
-		}
-	}
-	if (b == nullptr) {
-		return false;
-	}
-	else {
-		if (b->left == nullptr && b->right == nullptr) {
-			if (b == a->right) {
-				a->right = nullptr;
-			}
-			if (b == a->left) {
-				a->left = nullptr;
-			}
-			delete b;
-			return true;
-		}
-		else {
-			if (b->left == nullptr && b->right != nullptr) {
-				if (b == a->right) {
-					a->right = nullptr;
-				}
-				if (b == a->left) {
-					a->left = nullptr;
-				}
-				delete b;
-			}
-			else if (b->left != nullptr && b->right == nullptr) {
-				if (b == a->right) {
-					a->right = nullptr;
-				}
-				if (b == a->left) {
-					a->left = nullptr;
-				}
-				delete b;
-			}
-			else if (b->left != nullptr && b->right != nullptr) {
-				node_t* c = b;
-				a = b;
-				b = b->right;
-				while (b->left != nullptr) {
-					a = b;
-					b = b->left;
-				}
-				c->value = b->value;
-				a->left = b->right;
-				delete b;
-			}
-		}
-	}
-}
-return true;
-} 
+bool remove(T value){
+       if (root_ == nullptr)
+       {
+           return false;
+       }
+       else
+       {
+           node_t* param1 = root_;
+           node_t* param2 = root_;
+           while (1)
+           {
+               if (param2->value == value)
+               {
+                   break;
+               }
+               else if (param2->value < value)
+               {
+                   param1=param2;
+                   param2 = param2->right;
+               }
+               else if (param2->value > value)
+               {
+                   param1=param2;
+                   param2 = param2->left;
+               }
+               if(param2 == nullptr){
+                   break;
+               }
+           }
+           if(param2==nullptr){
+               return false;
+           }
+           else{
+               if(param2->left==nullptr && param2->right==nullptr){
+                   if(param2==param1->right){
+                       param1->right=nullptr;
+                   }
+                   if(param2==param1->left){
+                       param1->left=nullptr;
+                   }
+                   delete param2;
+               }
+               else{
+                   if(param2->left==nullptr && param2->right!=nullptr){
+                       if(param2==param1->right){
+                           param1->right=param2->right;
+                       }
+                       if(param2==param1->left){
+                           param1->left=param2->right;
+                       }
+                       delete param2;
+                   }
+                   else if(param2->left!=nullptr && param2->right==nullptr){
+                       if(param2==param1->right){
+                           param1->right=param2->left;
+                       }
+                       if(param2==param1->left){
+                           param1->left=param2->left;
+                       }
+                       delete param2;
+                   }
+                   else if(param2->left!=nullptr && param2->right!=nullptr){
+                       node_t* param=param2;
+                       param1=param2;
+                       param2=param2->right;
+                       while (param2->left!=nullptr){
+                           param1=param2;
+                           param2=param2->left;
+                       }
+                       param->value=param2->value;
+                       param1->left=param2->right;
+                       delete param2;
+                   }
+               }
+           }
+       }
+       return true;
+   }
