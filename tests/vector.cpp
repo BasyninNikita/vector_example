@@ -1,197 +1,116 @@
 #include <catch.hpp>
 #include <sstream>
-
 #include "vector.hpp"
-
 TEST_CASE("creating tree")
 {
-    tree_t <int> tree;
-    REQUIRE(tree.root() == nullptr);
+    tree_t<int> tree;
+    REQUIRE(tree.root()==nullptr);
 }
-
-TEST_CASE("insert and print tree int")
+TEST_CASE("add")
 {
-    tree_t <int> tree;
-
-    std::string input1{ "+3\n" };
-    std::string input2{ "+4\n" };
-    std::string input3{ "+2\n" };
-    std::string input4{ "+1\n" };
-    std::string input5{ "+5\n" };
-    std::string result{ "------5\n"
-                        "----4\n"
-                        "--3\n"
-                        "----2\n"
-                        "------1\n" };
-
-    std::istringstream inp1{ input1 };
-    std::istringstream inp2{ input2 };
-    std::istringstream inp3{ input3 };
-    std::istringstream inp4{ input4 };
-    std::istringstream inp5{ input5 };
-
-    REQUIRE(read(tree, inp1));
-    REQUIRE(read(tree, inp2));
-    REQUIRE(read(tree, inp3));
-    REQUIRE(read(tree, inp4));
-    REQUIRE(read(tree, inp5));
-
+    tree_t<int> tree;
+    tree.insert(2);
+    tree.insert(1);
+    tree.insert(3);
+    tree.insert(4);
+    std::string output {
+            "------4\n"
+        "---3\n"
+        "2\n"
+        "---1\n"
+    };
     std::ostringstream ostream;
-    tree.print(ostream, tree.root(), 1);
-    REQUIRE(ostream.str() == result);
+    tree.print(ostream,0,tree.root());
+    REQUIRE( ostream.str() == output );
 }
-
-TEST_CASE("insert and print tree double")
+TEST_CASE("?")
 {
-    tree_t <double> tree;
-
-    std::string input1{ "+3.3\n" };
-    std::string input2{ "+4.4\n" };
-    std::string input3{ "+2.2\n" };
-    std::string input4{ "+1.1\n" };
-    std::string input5{ "+5.5\n" };
-    std::string result{ "------5.5\n"
-                        "----4.4\n"
-                        "--3.3\n"
-                        "----2.2\n"
-                        "------1.1\n" };
-
-    std::istringstream inp1{ input1 };
-    std::istringstream inp2{ input2 };
-    std::istringstream inp3{ input3 };
-    std::istringstream inp4{ input4 };
-    std::istringstream inp5{ input5 };
-
-    REQUIRE(read(tree, inp1));
-    REQUIRE(read(tree, inp2));
-    REQUIRE(read(tree, inp3));
-    REQUIRE(read(tree, inp4));
-    REQUIRE(read(tree, inp5));
-
+    tree_t<int> tree;
+    tree.insert(1);
+    tree.insert(2);
+    tree.insert(3);
+    tree.insert(4);
+    tree.insert(5);
+    REQUIRE( tree.find(6)==false );
+    REQUIRE( tree.find(2)==true );
+}
+TEST_CASE("op+?")
+{
+    tree_t<int> tree;
+    tree.oper1('+',2);
+    tree.oper1('+',1);
+    tree.oper1('+',3);
+    std::string output{
+        "---3\n"
+        "2\n"
+        "---1"
+    };
     std::ostringstream ostream;
-    tree.print(ostream, tree.root(), 1);
-    REQUIRE(ostream.str() == result);
+    tree.oper2('?',2,ostream);
+    REQUIRE( ostream.str()== "true" );
+    std::ostringstream ostream1;
+    tree.oper2('?',5,ostream1);
+    REQUIRE( ostream1.str()== "false" );
 }
-
-TEST_CASE("find tree int")
+TEST_CASE("op+=")
 {
-    tree_t <int> tree;
-
-    std::string input1{ "+3\n" };
-    std::string input2{ "+4\n" };
-    std::string input3{ "+2\n" };
-    std::string input4{ "+1\n" };
-    std::string input5{ "+5\n" };
-
-    std::istringstream inp1{ input1 };
-    std::istringstream inp2{ input2 };
-    std::istringstream inp3{ input3 };
-    std::istringstream inp4{ input4 };
-    std::istringstream inp5{ input5 };
-
-    REQUIRE(read(tree, inp1));
-    REQUIRE(read(tree, inp2));
-    REQUIRE(read(tree, inp3));
-    REQUIRE(read(tree, inp4));
-    REQUIRE(read(tree, inp5));
-
-    REQUIRE(tree.find(1) == true);
-    REQUIRE(tree.find(2) == true);
-    REQUIRE(tree.find(5) == true);
-    REQUIRE(tree.find(7) == false);
-    REQUIRE(tree.find(0) == false);
+    tree_t<int> tree;
+    tree.oper1('+',2);
+    tree.oper1('+',1);
+    tree.oper1('+',3);
+    std::string output{
+        "---3\n"
+        "2\n"
+        "---1\n"
+    };
+    std::ostringstream ostream;
+    tree.oper2('=',0,ostream);
+    REQUIRE( ostream.str()== output );
 }
-
-TEST_CASE("find tree double")
+TEST_CASE("ravenstvo")
 {
-    tree_t <double> tree;
-
-    std::string input1{ "+3.3\n" };
-    std::string input2{ "+4.4\n" };
-    std::string input3{ "+2.2\n" };
-    std::string input4{ "+1.1\n" };
-    std::string input5{ "+5.5\n" };
-
-    std::istringstream inp1{ input1 };
-    std::istringstream inp2{ input2 };
-    std::istringstream inp3{ input3 };
-    std::istringstream inp4{ input4 };
-    std::istringstream inp5{ input5 };
-
-    REQUIRE(read(tree, inp1));
-    REQUIRE(read(tree, inp2));
-    REQUIRE(read(tree, inp3));
-    REQUIRE(read(tree, inp4));
-    REQUIRE(read(tree, inp5));
-
-    REQUIRE(tree.find(1.1) == true);
-    REQUIRE(tree.find(2.2) == true);
-    REQUIRE(tree.find(5.5) == true);
-    REQUIRE(tree.find(7.7) == false);
-    REQUIRE(tree.find(0) == false);
+    tree_t<int> tree1;
+    tree_t<int> tree2;
+    tree_t<int> tree3;
+    tree1.oper1('+',2);
+    tree1.oper1('+',1);
+    tree1.oper1('+',3);
+    tree2.oper1('+',2);
+    tree2.oper1('+',1);
+    tree2.oper1('+',3);
+    tree3.oper1('+',5);
+    tree3.oper1('+',2);
+    tree3.oper1('+',7);
+    REQUIRE(tree1==tree2);
+    REQUIRE(!(tree1==tree3));
 }
-
-TEST_CASE("equal")
-{
-	tree_t<int> tree1;
-	tree_t<int> tree2 {3 , 4 , 2 , 1 , 5};
-	tree1.insert(3);
-	tree1.insert(4);
-	tree1.insert(2);
-	tree1.insert(1);
-	tree1.insert(5);
-	REQUIRE(tree1==tree2);
-}
-
 TEST_CASE("deleting")
 {
-    	tree_t<int> tree{3, 4, 2, 1, 5, 10, 7, 8};    	
-    	
-	tree.remove(5);
-    	std::string result5{"------10\n"
-	                        "----------8\n"
-                            "--------7\n"
-                            "----4\n"
-                            "--3\n"
-                            "----2\n"
-                            "------1\n"};
-	    std::ostringstream ostream1;
-	    tree.print(ostream1, tree.root(), 1);
-	    REQUIRE( ostream1.str() == result5 );
-	       
-	    tree.remove(1);
-    		std::string result1{"------10\n"
-	                        "----------8\n"
-                            "--------7\n"
-                            "----4\n"
-                            "--3\n"
-                            "----2\n"};
-	    std::ostringstream ostream2;
-	    tree.print(ostream2, tree.root(), 1);
-	    REQUIRE( ostream2.str() == result1 );
-	
-	tree_t<int> tree0{8, 3, 11, 1, 5, 9, 14, 6, 10, 12, 15, 7, 13};    	
-    	
-	tree0.remove(11);
-    	std::string result11{"--------15\n"
-	                    "------14\n"
-                            "--------13\n"
-                            "----12\n"
-                            "--------10\n"
-                            "------9\n"
-                            "--8\n"
-			    "----------7\n"
-			    "--------6\n"
-			    "------5\n"
-			    "----3\n"
-			    "------1\n"};
-	    std::ostringstream ostream3;
-	    tree.print(ostream3, tree0.root(), 1);
-	    REQUIRE( ostream3.str() == result11 );
+        tree_t<int> tree{4, 5, 3, 2, 6, 11, 8, 9};
+        tree.remove(6);
+        std::string result1{"------11\n"
+                        "------------9\n"
+                            "---------8\n"
+                            "---5\n"
+                            "4\n"
+                            "---3\n"
+                            "------2\n"};
+        std::ostringstream ostream1;
+        tree.oper2('=',0,ostream1);
+        REQUIRE( ostream1.str() == result1 ); 
+        tree.remove(2);
+            std::string result2{"------11\n"
+                            "------------9\n"
+                                "---------8\n"
+                                "---5\n"
+                                "4\n"
+                                "---3\n"};
+        std::ostringstream ostream2;
+        tree.oper2('=',0,ostream2);
+        REQUIRE( ostream2.str() == result2 );
 }
- 
 SCENARIO("BST delete non inserted element", "[delete]") {
-    tree_t<int> tree{8};
+    BinarySearchTree<int> tree = {8};
     REQUIRE( !tree.remove(4) );
     REQUIRE( !tree.isEmpty() );
 }
@@ -203,7 +122,7 @@ SCENARIO("BST delete non inserted element", "[delete]") {
 //                                          08
 //                                         ---->
 SCENARIO("BST delete root without children", "[delete]") {
-    tree_t<int> tree{8};
+    BinarySearchTree<int> tree = {8};
     REQUIRE( tree.remove(8) );
     REQUIRE( tree.isEmpty() );
 }
@@ -221,9 +140,9 @@ SCENARIO("BST delete root without children", "[delete]") {
 //      | 03 |                             ---->
 //      +----+
 SCENARIO("BST delete root with one child", "[delete]") {
-    tree_t<int> tree {8, 4, 3};
+    BinarySearchTree<int> tree = {8, 4, 3};
     REQUIRE( tree.remove(8) );
-    REQUIRE( tree == tree_t<int>({4, 3}) );
+    REQUIRE( tree == BinarySearchTree<int>({4, 3}) );
 }
 //                +----+                                              +----+
 //                |-08-|                                              | 09 |
@@ -249,9 +168,9 @@ SCENARIO("BST delete root with one child", "[delete]") {
 //                          | 12 |                                              | 12 |
 //                          +----+                                              +----+
 SCENARIO("BST delete root with children", "[delete]") {
-    tree_t<int> tree{8, 4, 3, 10, 9, 13, 11, 12};
+    BinarySearchTree<int> tree = {8, 4, 3, 10, 9, 13, 11, 12};
     REQUIRE( tree.remove(8) );
-    REQUIRE( tree == tree_t<int>({9, 4, 3, 10, 13, 11, 12}) );
+    REQUIRE( tree == BinarySearchTree<int>({9, 4, 3, 10, 13, 11, 12}) );
 }
 //                +----+                                              +----+
 //                | 08 |                                              | 08 |
@@ -277,9 +196,9 @@ SCENARIO("BST delete root with children", "[delete]") {
 //                          | 12 |                                              | 12 |
 //                          +----+                                              +----+
 SCENARIO("BST delete non root without children", "[delete]") {
-    tree_t<int> tree {8, 4, 3, 10, 9, 13, 11, 12};
+    BinarySearchTree<int> tree = {8, 4, 3, 10, 9, 13, 11, 12};
     REQUIRE( tree.remove(3) );
-    REQUIRE( tree == tree_t<int>({8, 4, 10, 9, 13, 11, 12}) );
+    REQUIRE( tree == BinarySearchTree<int>({8, 4, 10, 9, 13, 11, 12}) );
 }
 //                +----+                                              +----+
 //                | 08 |                                              | 08 |
@@ -305,9 +224,9 @@ SCENARIO("BST delete non root without children", "[delete]") {
 //                          | 12 |
 //                          +----+
 SCENARIO("BST delete non root with one child", "[delete]") {
-    tree_t<int> tree{8, 4, 3, 10, 9, 13, 11, 12};
+    BinarySearchTree<int> tree = {8, 4, 3, 10, 9, 13, 11, 12};
     REQUIRE( tree.remove(11) );
-    REQUIRE( tree == tree_t<int>({8, 4, 3, 10, 9, 13, 12}) );
+    REQUIRE( tree == BinarySearchTree<int>({8, 4, 3, 10, 9, 13, 12}) );
 }
 //                +----+                                              +----+
 //                | 08 |                                              | 08 |
@@ -333,7 +252,7 @@ SCENARIO("BST delete non root with one child", "[delete]") {
 //                          | 12 |
 //                          +----+
 SCENARIO("BST delete non root with children", "[delete]") {
-    tree_t<int> tree{8, 4, 3, 10, 9, 13, 11, 12};
+    BinarySearchTree<int> tree = {8, 4, 3, 10, 9, 13, 11, 12};
     REQUIRE( tree.remove(10) );
-    REQUIRE( tree == tree_t<int>({8, 4, 3, 11, 9, 13, 12}) );
+    REQUIRE( tree == BinarySearchTree<int>({8, 4, 3, 11, 9, 13, 12}) );
 }
