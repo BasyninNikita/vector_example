@@ -173,127 +173,112 @@ void tree_t<T>:: oper2(char op, T value,std::ostream& stream){
 	}
 template <typename T>
 bool tree_t<T>:: remove(T value){
-      if (root_ == nullptr)
-      {
-          return false;
-      }
-      else
-      {
-          node_t* param1 = root_;
-          node_t* param2 = root_;
-          while (1)
-          {
-              if (param2->value == value)
-              {
-                  break;
-              }
-              else if (param2->value < value)
-              {
-                  param1=param2;
-                  param2 = param2->right;
-              }
-              else if (param2->value > value)
-              {
-                  param1=param2;
-                  param2 = param2->left;
-              }
-          if(param2==nullptr){
-              return false;
-          }
-       }
-              if(param2->left==nullptr && param2->right==nullptr){
-                  if(param2!=root_){
-                          if(param2==param1->right){
-                           param1->right=nullptr;
-                   delete param2;
-                          }
-                          if(param2==param1->left){
-                           param1->left=nullptr;
-                              delete param2;
-                   }
-                  }
-            else if(param2==root_)
-           {
-             node_t * node=root_;
-             root_=nullptr;
-             delete node;
-           }
-              else{
-                  if((param2->left==nullptr && param2->right!=nullptr) || (param2->left!=nullptr && param2->right==nullptr))
-           {
-            if(param2!=root_){
-                              if(param2==param1->left){
-                    if(param2->left!=nullptr)
-                    {
-                                      param1->left=param2->left;
-                           delete param2;
-                                  }    
-                                  else if(param2->right!=nullptr){
-                                  param1->left=param2->right;
-                                  delete param2;
-                           }
-                          }
-                else if(param1->right==param2)
-                {
-                    if(param2->left!=nullptr)
-                    {
-                        param1->left=param2->left;
+       if(root_ == nullptr){
+        return false;
+    }
+    else{
+        node_t* param1 = nullptr;
+        node_t* param2 = root_;
+        while(1){
+            if(param2->value == value){
+                break;
+            }
+            else if(value > param2->value){
+                param1 = param2;
+                param2 = param2->right;
+            }
+            else if(value < param2->value){
+                param1 = param2;
+                param2 = param2->left;
+            }
+            if(param2 == nullptr){
+                return false;
+            }
+        }
+        if(param2->left == nullptr && param2->right == nullptr){
+            if(param2 == root_){
+                node_t* node = root_;
+                root_ = nullptr;
+                delete node;
+            }
+            else{
+                if(param1->left == param2){
+                    param1->left = nullptr;
+                    delete param2;
+                }
+                if(param1->right == param2){
+                    param1->right = nullptr;
+                    delete param2;
+                }
+            }
+        }
+        else if((param2->left != nullptr && param2->right == nullptr) || (param2->left == nullptr && param2->right != nullptr)){
+            if(param2 == root_){
+                node_t* node = root_;
+                if(param2->left != nullptr){
+                    root_ = param2->left;
+                }
+                else if(param2->right != nullptr){
+                    root_ = param2->left;
+                }
+                delete node;
+            }
+            else{
+                if(param1->left == param2){
+                    if(param2->left != nullptr){
+                        param1->left = param2->left;
                         delete param2;
                     }
-                    else if(param2->right!=nullptr)
-                    {
-                        param1->right=param2->right;
+                    else if(param2->right != nullptr){
+                        param1->left = param2->right;
+                        delete param2;
+                    }
+                }
+                else if(param1->right == param2){
+                    if(param2->left != nullptr){
+                        param1->right = param2->left;
+                        delete param2;
+                    }
+                    else if(param2->right != nullptr){
+                        param1->right = param2->right;
                         delete param2;
                     }
                 }
             }
-             else if(param2==root_)
-             {
-                 node_t * node=root_;
-                 if(param2->left != nullptr){
-                                root_ = param2->left;
-                        }
-                       else if(param2->right != nullptr){
-                               root_ = param2->left;
-                       }
-                       delete node;
-             }
-           }
-              
-                  else if(param2->left!=nullptr && param2->right!=nullptr){
+        }
+        else if(param2->left != nullptr && param2->right != nullptr){
             node_t* node = param2;
-                   param1 = param2;
-                   param2 = param2->right;
-                          if(param2->left!=nullptr){
-                           while(param2->left != nullptr){
-                               param1 = param2;
-                               param2 = param2->left;
-                       }
-                       if(param2->right == nullptr){
-                               node->value = param2->value;
-                               param1->left = nullptr;
-                               delete param2;
-                       }
-                       else{
-                               node->value = param2->value;
-                               param1->left = param2->right;
-                               delete param2;
-                       }
-                   }
-                else if(param2->left == nullptr){
-                       if(param2->right == nullptr){
-                               node->value = param2->value;
-                               param1->right = nullptr;
-                               delete param2;
-                       }
-                       else{
-                               node->value = param2->value;
-                               param1->right = param2->right;
-                               delete param2;
-                       }
-                   }
-                  }
-      return true;
-      }
- }
-
+            param1 = param2;
+            param2 = param2->right;
+            if(param2->left == nullptr){
+                if(param2->right == nullptr){
+                    node->value = param2->value;
+                    param1->right = nullptr;
+                    delete param2;
+                }
+                else{
+                    node->value = param2->value;
+                    param1->right = param2->right;
+                    delete param2;
+                }
+            }
+            else{
+                while(param2->left != nullptr){
+                    param1 = param2;
+                    param2 = param2->left;
+                }
+                if(param2->right == nullptr){
+                    node->value = param2->value;
+                    param1->left = nullptr;
+                    delete param2;
+                }
+                else{
+                    node->value = param2->value;
+                    param1->left = param2->right;
+                    delete param2;
+                }
+            }
+        }
+        return true;
+    }
+}
