@@ -282,4 +282,4 @@ template <typename T>
         return true;
     }
 }
-}
+
