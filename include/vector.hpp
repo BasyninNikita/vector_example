@@ -21,12 +21,10 @@ public:
 	void oper2(char op, T value,std::ostream& stream);
 	auto operator==(tree_t & other) const;
 	bool ravnbranch(node_t * first,node_t * second) const;
+	bool isEmpty();
 	tree_t(std::initializer_list<T> keys);
 	bool remove(T key);
-	node_t* root()
-	{
-		return root_; 
-	}
+	node_t* root(){return root_; }
 };
 template <typename T>
 tree_t<T>::tree_t(){
@@ -129,6 +127,12 @@ bool tree_t<T>:: ravnbranch(node_t * first,node_t * second) const
 	else return(false);
 }
 template <typename T>
+bool tree_t<T>::isEmpty()
+{
+	if(root_==nullptr) return true;
+	else return false;
+}
+template <typename T>
 void tree_t<T>::print(std::ostream & stream,int lvl,node_t* node){
 	if (node==nullptr)
 		return;
@@ -193,33 +197,49 @@ bool tree_t<T>:: remove(T value){
                    param1=param2;
                    param2 = param2->left;
                }
-               if(param2 == nullptr){
-                   break;
-               }
-           }
            if(param2==nullptr){
                return false;
            }
-           else{
+	   }
                if(param2->left==nullptr && param2->right==nullptr){
-                   if(param2==param1->right){
-                       param1->right=nullptr;
+                   if(param2!=root_){
+                       	if(param2==param1->right){
+                        	param1->right=nullptr;
+			   	delete param2;
+                       	}
+                       	if(param2==param1->left){
+                        	param1->left=nullptr;
+                       		delete param2;
+		       	}
                    }
-                   if(param2==param1->left){
-                       param1->left=nullptr;
-                   }
-                   delete param2;
-               }
+		    else if(param2==root)
+		   {
+			 node_t node=root_;
+			 root_nullptr;
+			 delete node;
+		   }
                else{
-                   if(param2->left==nullptr && param2->right!=nullptr){
-                       if(param2==param1->right){
-                           param1->right=param2->right;
-                       }
-                       if(param2==param1->left){
-                           param1->left=param2->right;
-                       }
-                       delete param2;
-                   }
+                   if(param2->left==nullptr && param2->right!=nullptr) || (param2->left!=nullptr && param2->right==nullptr)
+		   {
+			if(param2!=root_){
+                       		if(param2==param1->left){
+					if(param2->left!=nullptr)
+					{
+                           			param1->left=param2->left;
+			   			delete param2;
+                       			}	
+                       			else if(param2->right!=nullptr){
+                           		param1->left=param2->right;
+                       			delete param2;
+		       			}
+                   		}
+			 else if(param2==root)
+			 {
+				 node_t node=root_;
+				 root_nullptr;
+				 delete node;
+			 }
+			   
                    else if(param2->left!=nullptr && param2->right==nullptr){
                        if(param2==param1->right){
                            param1->right=param2->left;
