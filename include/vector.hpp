@@ -242,12 +242,12 @@ bool tree_t<T>:: remove(T value){
 					}
 					else if(param2->right!=nullptr)
 					{
-						param1->right=param2-right;
+						param1->right=param2->right;
 						delete param2;
 					}
 				}
 			}
-			 else if(param2==root)
+			 else if(param2==root_)
 			 {
 				 node_t * node=root_;
 				 if(param2->left != nullptr){
