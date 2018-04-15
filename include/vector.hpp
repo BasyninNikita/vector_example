@@ -233,14 +233,34 @@ bool tree_t<T>:: remove(T value){
                        			delete param2;
 		       			}
                    		}
+				else if(param1->right==param2)
+				{
+					if(param2->left!=nullptr)
+					{
+						param1->left=param2->left;
+						delete param2;
+					}
+					else if(param2->right!=nullptr)
+					{
+						param1->right=param2-right;
+						delete param2;
+					}
+				}
+			}
 			 else if(param2==root)
 			 {
-				 node_t node=root_;
-				 root_nullptr;
-				 delete node;
+				 node_t * node=root_;
+				 if(param2->left != nullptr){
+                    		 	root_ = param2->left;
+                		 }
+                		else if(param2->right != nullptr){
+                    			root_ = param2->left;
+                		}
+                		delete node;
 			 }
+		   }
 			   
-                   else if(param2->left!=nullptr && param2->right==nullptr){
+                   else if(param2->left!=nullptr && param2->right!=nullptr){
                        if(param2==param1->right){
                            param1->right=param2->left;
                        }
