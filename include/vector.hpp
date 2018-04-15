@@ -261,28 +261,38 @@ bool tree_t<T>:: remove(T value){
 		   }
 			   
                    else if(param2->left!=nullptr && param2->right!=nullptr){
-                       if(param2==param1->right){
-                           param1->right=param2->left;
-                       }
-                       if(param2==param1->left){
-                           param1->left=param2->left;
-                       }
-                       delete param2;
+			node_t* node = param2;
+            		param1 = param2;
+            		param2 = param2->right;
+                       	if(param2->left!=nullptr){
+                        	while(param2->left != nullptr){
+                    			param1 = param2;
+                    			param2 = param2->left;
+                		}
+                		if(param2->right == nullptr){
+                    			node->value = param2->value;
+                    			param1->left = nullptr;
+                    			delete param2;
+                		}
+                		else{
+                    			node->value = param2->value;
+                    			param1->left = param2->right;
+                    			delete param2;
+                		}
+            		}
+		        else if(param2->left == nullptr){
+                		if(param2->right == nullptr){
+                    			node->value = param2->value;
+                    			param1->right = nullptr;
+                    			delete param2;
+                		}
+                		else{
+                    			node->value = param2->value;
+                    			param1->right = param2->right;
+                    			delete param2;
+                		}
+            		}
                    }
-                   else if(param2->left!=nullptr && param2->right!=nullptr){
-                       node_t* param=param2;
-                       param1=param2;
-                       param2=param2->right;
-                       while (param2->left!=nullptr){
-                           param1=param2;
-                           param2=param2->left;
-                       }
-                       param->value=param2->value;
-                       param1->left=param2->right;
-                       delete param2;
-                   }
-               }
-           }
-       }
        return true;
-   }
+   	}
+}
