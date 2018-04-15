@@ -129,8 +129,8 @@ bool tree_t<T>:: ravnbranch(node_t * first,node_t * second) const
 template <typename T>
 bool tree_t<T>::isEmpty()
 {
-	if(root_==nullptr) return true;
-	else return false;
+	if(root_==nullptr) return (true);
+	else return (false);
 }
 template <typename T>
 void tree_t<T>::print(std::ostream & stream,int lvl,node_t* node){
@@ -214,7 +214,7 @@ bool tree_t<T>:: remove(T value){
                    }
 		    else if(param2==root_)
 		   {
-			 node_t node=root_;
+			 node_t * node=root_;
 			 root_=nullptr;
 			 delete node;
 		   }
