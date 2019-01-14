@@ -99,7 +99,10 @@ bool vector_t<T>::operator ==(vector_t const & other) const
 template <typename T>
 vector_t<T>::~vector_t()
 {
-	delete []elements_;
+	size_ = 0;
+	capacity_ = 0;
+	if(elements != nullptr)
+		delete []elements_;
 }
 template <typename T>
 std::size_t vector_t<T>::size() const
@@ -128,6 +131,12 @@ void vector_t<T>::push_back(T value)
 	elements_[size_]=value;
 	++size_;
 	
+}
+template <typename T>
+void vector_t<T>::insert(std::size_t pos,T value)
+{
+	if(pos < capasity_)
+		
 }
 template <typename T>
 void vector_t<T>::pop_back()
