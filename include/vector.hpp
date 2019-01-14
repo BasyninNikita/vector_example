@@ -11,7 +11,9 @@ private:
 public:
 	vector_t();
 	vector_t(vector_t const & other);
+	vector_t(vector_t && other)
 	vector_t & operator =(vector_t const & other);
+	vector_t & operator =(vector_t && other)
 	~vector_t();
 	std::size_t size() const;
 	std::size_t capacity() const;
@@ -34,10 +36,19 @@ vector_t<T>::vector_t(vector_t<T> const & other)
 {
 	size_ = other.size_;
 	capacity_ = other.capacity_;
+	if(elements_!=nullptr)
+		delete[] elements;
 	elements_ = new T [capacity_];	
-	for (std::size_t i=0; i<other.capacity_; i++) {
+	for (std::size_t i=0; i<size_; i++) {
 		elements_[i] = other.elements_[i];
 	}	
+}
+template <typename T>
+vector_t<T>::vector_t(vector_t<T> && other)
+{
+	std::swap(size_,other.size_);
+	std::swap(capacity_,other.capacity_);
+	std::swap(elements_,other.elements);
 }
 template <typename T>
 T & vector_t<T>::at(std::size_t index)
@@ -53,12 +64,20 @@ vector_t<T> & vector_t<T>::operator =(vector_t const & other)
 {
 	size_=other.size_;
 	capacity_=other.capacity_;
+	if(elements_ != nullptr) delete[] elements_;
 	elements_ = new T[capacity_];
 	for(std::size_t i=0;i<other.capacity_;i++)
 	{
 		elements_[i]=other.elements_[i];
 	}
 	return *this;
+}
+template <typename T>
+vector_t<T> & vector_t<T>::operator =(vector_t && other)
+{
+	std::swap(size_,other.size_);
+	std::swap(capacity_,other.capacity_);
+	std::swap(elements_,other.elements);
 }
 template <typename T>
 bool vector_t<T>::operator ==(vector_t const & other) const
@@ -106,7 +125,8 @@ void vector_t<T>::push_back(T value)
         	delete [] elements_;
         	elements_ = p;
 	}
-	elements_[size_++]=value;
+	elements_[size_]=value;
+	++size_;
 	
 }
 template <typename T>
